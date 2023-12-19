@@ -91,7 +91,7 @@ void prompt_for_size(int* rows, int* columns) {
 
 /************
  * FUNCTION
- * NAME: 3x3 matrix entrance
+ * NAME: matrix_populate_3x3
  * INPUTS: 
  * OUTPUTS: 
  * DESCRIPTION: 
@@ -115,12 +115,14 @@ for(i = 0; i < 3; i++) {
     }
 }
 //print full matrix
+printf("---------------------\n");
 for(i = 0; i < 3; i++) {
     for(j = 0; j < 3; j++) {
-        printf("%d\t", userMatrix[i][j]);
+        printf("[%d]\t", userMatrix[i][j]);
     }
     printf("\n");
 }
+printf("---------------------\n");
 
 //find determinant
 det = ((userMatrix[0][0])*((userMatrix[1][1] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][1])));
@@ -131,4 +133,46 @@ printf("Determinant: %d\n", det);
 
 
     
+}
+
+/************
+ * FUNCTION
+ * NAME: matrix_populate_2x2
+ * INPUTS: 
+ * OUTPUTS: 
+ * DESCRIPTION: 
+*************/
+void matrix_populate_2x2(int userMatrix[][COLUMNS]) {
+
+int i = 0;
+int j = 0;
+int flag = 0;
+int det = 0;
+//populate matrix
+for(i = 0; i < 2; i++) {
+    for(j = 0; j < 2; j++) {
+        printf("Enter a value for A%d%d: ", i+1, j+1);
+        //error check
+        flag = scanf("%d", &userMatrix[i][j]);
+        while(flag == 0) {
+            printf("INPUT ERROR. Enter a valid integer number");
+            fflush(stdin);
+            flag = scanf("%d", &userMatrix[i][j]);
+        }
+    }
+}
+//print full matrix
+printf("----------\n");
+for(i = 0; i < 2; i++) {
+    for(j = 0; j < 2; j++) {
+        printf("[%d]\t", userMatrix[i][j]);
+    }
+    printf("\n");
+}
+printf("----------\n");
+
+//find determinant
+det = userMatrix[0][0] * userMatrix[1][1] - userMatrix[0][1] * userMatrix[1][0];
+printf("Determinant: %d\n", det);
+
 }

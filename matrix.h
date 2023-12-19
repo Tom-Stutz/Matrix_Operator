@@ -20,5 +20,6 @@ int wait_for_user(void);
 void enter_matrix(int*,int*);
 void prompt_for_size(int*, int*);
 void matrix_populate_3x3(int userMatrix[][COLUMNS]);
+void matrix_populate_2x2(int userMatrix[][COLUMNS]);
 
 #endif

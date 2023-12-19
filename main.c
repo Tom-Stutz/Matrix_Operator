@@ -23,10 +23,15 @@ userInput = wait_for_user();
 //switch case for user inputs
 switch(userInput) {
     case 1:
+    
     enter_matrix(&rows, &columns);
     if(rows == 3 && columns == 3) {
         matrix_populate_3x3(userMatrix);
     }
+    else if(rows == 2 && columns == 2) {
+        matrix_populate_2x2(userMatrix);
+    }
+
     break;
 
     default:
