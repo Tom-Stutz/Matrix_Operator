@@ -121,8 +121,12 @@ for(i = 0; i < 3; i++) {
     }
     printf("\n");
 }
+
 //find determinant
-det = ((userMatrix[0][0])*((userMatrix[1][1] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][1]))) - (userMatrix[0][1])*((userMatrix[1][0] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][0])) + (userMatrix[0][2])*((userMatrix[1][0] * userMatrix[2][1]) - (userMatrix[1][1] * userMatrix[2][0]));
+det = ((userMatrix[0][0])*((userMatrix[1][1] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][1])));
+det = det - (userMatrix[0][1])*((userMatrix[1][0] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][0]));
+det = det + (userMatrix[0][2])*((userMatrix[1][0] * userMatrix[2][1]) - (userMatrix[1][1] * userMatrix[2][0]));
+
 printf("Determinant: %d\n", det);
 
 
