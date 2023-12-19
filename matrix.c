@@ -73,6 +73,13 @@ void enter_matrix(int* rows, int* columns) {
 
 }
 
+/************
+ * FUNCTION
+ * NAME: prompt_for_size
+ * INPUTS: int* rows, int* columns
+ * OUTPUTS: 
+ * DESCRIPTION: 
+*************/
 void prompt_for_size(int* rows, int* columns) {
 
     printf("Enter a matrix size in the following format: _x_ (e.g. 2x2)\n");
@@ -80,4 +87,17 @@ void prompt_for_size(int* rows, int* columns) {
     fscanf(stdin, "%dx%d", rows, columns);
     
 
+}
+
+/************
+ * FUNCTION
+ * NAME: 3x3 matrix entrance
+ * INPUTS: 
+ * OUTPUTS: 
+ * DESCRIPTION: 
+*************/
+void matrix_populate_3x3(int userMatrix[][COLUMNS]) {
+
+
+    
 }
