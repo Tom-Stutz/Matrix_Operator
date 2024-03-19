@@ -17,12 +17,19 @@ double userMatrix[ROWS][COLUMNS];
 int parity_val = 0;
 int m = 3;
 int n = 3;
-int temp_set[3] = {2,1,3};
+int temp_set[3] = {0,1,2};
+double temp_matrix[ROWS][COLUMNS] = {{1,2,3},{1,2,3},{1,2,3}};
+double temp_product = 1;
+parity(temp_matrix,temp_set, &m,&n,&parity_val, &temp_product);
+printf("parity is: %d\n\n", parity_val);
+printf("Product was %g\n", temp_product);
+
+
+
 
 //initialize
 welcome_screen();
-parity(0,temp_set, &m,&n,&parity_val, 0);
-printf("parity is: %d\n\n", parity_val);
+
 
 menu_screen();
 
@@ -49,7 +56,7 @@ switch(userInput) {
     break;
 
     default:
-    printf("LOGICAL ERROR.\n");
+    printf("Logical ERROR\n");
     return -1;
     break;
 

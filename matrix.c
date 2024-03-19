@@ -239,7 +239,7 @@ int ordered_set[*m];
 int permutation_set[*m];
 int value = 1;
 int parity_sign = 1;
-double product = 0;
+double product = 1;     //very important to initialize to 1
 //create a set that is {1,2,3,...m}
 for(i = 0; i < *m; i++) {
     ordered_set[i] = value;
@@ -288,20 +288,35 @@ for(i = 0; i < *m; i++) {
 
     for(j = i + 1; j < *m; j++) {
         if(permutation_set[j] < permutation_set[i]) {
-            *parity_value++;
+            
+            *parity_value = *parity_value + 1;
         }
     }
 
 }
 
-if((*parity_value % 2 == 0)) {
+if(*parity_value == 0) {
+    *parity_value = 1;
+}
+else if((*parity_value % 2 == 0)) {
     *parity_value = 1;
 }
 else {
     *parity_value = -1;
 }
 
+/*loop structure
+a1_a2_a3_...am_
+ai(permutation_set[i])*a(i+1)(permutation_set[i+1])
 
+*/
+for(i = 0; i < *m; i++) {
+    *product = (*product)*userMatrix[i][permutation_set[i]];
+    printf("a%d%d * ", i,permutation_set[i]);
+    printf("%g", *product);
+
+}
+printf("\n");
 
 }
 
