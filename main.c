@@ -11,10 +11,11 @@ int main(void) {
 int userInput = 0;
 int rows = 0;
 int columns = 0;
-int userMatrix[ROWS][COLUMNS];
+double userMatrix[ROWS][COLUMNS];
 
 //initialize
 welcome_screen();
+printf("%d\n",factorial(4));
 menu_screen();
 
 //wait for user input
@@ -25,12 +26,17 @@ switch(userInput) {
     case 1:
     
     enter_matrix(&rows, &columns);
+    matrix_populate_mxn(userMatrix,&rows,&columns);
+
+    /*
+    
     if(rows == 3 && columns == 3) {
         matrix_populate_3x3(userMatrix);
     }
     else if(rows == 2 && columns == 2) {
         matrix_populate_2x2(userMatrix);
     }
+    */
 
     break;
 
