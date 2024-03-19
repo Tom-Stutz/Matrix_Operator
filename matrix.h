@@ -22,8 +22,8 @@ void prompt_for_size(int*, int*);
 void matrix_populate_3x3(double userMatrix[][COLUMNS]);
 void matrix_populate_2x2(double userMatrix[][COLUMNS]);
 void matrix_populate_mxn(double userMatrix[][COLUMNS], int*, int*);
-double determinant_mxn(double userMatrix[][COLUMNS],int*,int*);
-void parity(double userMatrix[][COLUMNS], int*, int*, int*, double*);
+double determinant_mxm(double userMatrix[][COLUMNS],int*);
+void parity(double userMatrix[][COLUMNS],int permutation_set[], int*, int*, int*, double*);
 int factorial(int);
 
 

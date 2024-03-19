@@ -13,9 +13,17 @@ int rows = 0;
 int columns = 0;
 double userMatrix[ROWS][COLUMNS];
 
+
+int parity_val = 0;
+int m = 3;
+int n = 3;
+int temp_set[3] = {2,1,3};
+
 //initialize
 welcome_screen();
-printf("%d\n",factorial(4));
+parity(0,temp_set, &m,&n,&parity_val, 0);
+printf("parity is: %d\n\n", parity_val);
+
 menu_screen();
 
 //wait for user input
