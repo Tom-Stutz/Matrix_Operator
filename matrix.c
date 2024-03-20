@@ -1,16 +1,20 @@
-/*************************************
- * Header
- * 
-*************************************/
+/*******************************************************************************************
+AUTHOR   : Tom Stutz
+PROGRAM  : Matrix_Operator
+FILE NAME: matrix.c
+NOTES    : function file associated with matrix.h (contains functions related to matrix operations)
+LAST EDIT: WEDNESDAY MAR 20, 13:26
+VERSION: 1.0.0
+*******************************************************************************************/
 
 #include  "matrix.h"
 
 /************
  * FUNCTION
  * NAME: welcome_screen
- * INPUTS:
- * OUTPUTS:
- * DESCRIPTION:
+ * INPUTS: n/a
+ * OUTPUTS: n/a
+ * DESCRIPTION: Print title
 *************/
 void welcome_screen(void) {
 printf("\nMATRIX CALCULATOR\n");
@@ -20,9 +24,9 @@ printf("--------------------\n");
 /************
  * FUNCTION
  * NAME: menu_screen
- * INPUTS:
- * OUTPUTS:
- * DESCRIPTION:
+ * INPUTS: n/a
+ * OUTPUTS: n/a
+ * DESCRIPTION: print menu options
 *************/
 void menu_screen(void) {
 //Menu
@@ -58,14 +62,12 @@ return userInput;
 /************
  * FUNCTION
  * NAME: enter_matrix
- * INPUTS: void
- * OUTPUTS: 
- * DESCRIPTION: 
+ * INPUTS: rows(ptr), columns (ptr)
+ * OUTPUTS: rows (ptr), columns (ptr)
+ * DESCRIPTION: calls the promt_for_size function, has user enter a matrix
 *************/
 void enter_matrix(int* rows, int* columns) {
     //variables
-    int error = 0;
-
 
     prompt_for_size(rows, columns);
     printf("User entered: %dx%d\n", *rows, *columns);
@@ -77,8 +79,8 @@ void enter_matrix(int* rows, int* columns) {
  * FUNCTION
  * NAME: prompt_for_size
  * INPUTS: int* rows, int* columns
- * OUTPUTS: 
- * DESCRIPTION: 
+ * OUTPUTS: int* rows, int* columns
+ * DESCRIPTION: asks the user for matrix size, checks for valid entry
 *************/
 void prompt_for_size(int* rows, int* columns) {
 
@@ -87,7 +89,6 @@ void prompt_for_size(int* rows, int* columns) {
 
     //error check
     printf("Enter a matrix size in the following format: _x_ (e.g. 2x2 up to %dx%d)\n",ROWS,COLUMNS);
-    
     fflush(stdin);
     flag = fscanf(stdin, "%dx%d", rows, columns);
     while(flag == 0 || (*rows > ROWS) || (*columns > COLUMNS)) {
@@ -102,98 +103,10 @@ void prompt_for_size(int* rows, int* columns) {
 
 /************
  * FUNCTION
- * NAME: matrix_populate_3x3
- * INPUTS: 
- * OUTPUTS: 
- * DESCRIPTION: 
-*************/
-void matrix_populate_3x3(double userMatrix[][COLUMNS]) {
-int i = 0;
-int j = 0;
-int flag = 0;
-int det = 0;
-//populate matrix
-for(i = 0; i < 3; i++) {
-    for(j = 0; j < 3; j++) {
-        printf("Enter a value for A%d%d: ", i+1, j+1);
-        //error check
-        flag = scanf("%lf", &userMatrix[i][j]);
-        while(flag == 0) {
-            printf("INPUT ERROR. Enter a valid integer number");
-            fflush(stdin);
-            flag = scanf("%lf", &userMatrix[i][j]);
-        }
-    }
-}
-//print full matrix
-printf("---------------------\n");
-for(i = 0; i < 3; i++) {
-    for(j = 0; j < 3; j++) {
-        printf("[%lf]\t", userMatrix[i][j]);
-    }
-    printf("\n");
-}
-printf("---------------------\n");
-
-//find determinant
-det = ((userMatrix[0][0])*((userMatrix[1][1] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][1])));
-det = det - (userMatrix[0][1])*((userMatrix[1][0] * userMatrix[2][2]) - (userMatrix[1][2] * userMatrix[2][0]));
-det = det + (userMatrix[0][2])*((userMatrix[1][0] * userMatrix[2][1]) - (userMatrix[1][1] * userMatrix[2][0]));
-
-printf("Determinant: %d\n", det);
-
-
-    
-}
-
-/************
- * FUNCTION
- * NAME: matrix_populate_2x2
- * INPUTS: 
- * OUTPUTS: 
- * DESCRIPTION: 
-*************/
-void matrix_populate_2x2(double userMatrix[][COLUMNS]) {
-
-int i = 0;
-int j = 0;
-int flag = 0;
-int det = 0;
-//populate matrix
-for(i = 0; i < 2; i++) {
-    for(j = 0; j < 2; j++) {
-        printf("Enter a value for A%d%d: ", i+1, j+1);
-        //error check
-        flag = scanf("%lf", &userMatrix[i][j]);
-        while(flag == 0) {
-            printf("INPUT ERROR. Enter a valid integer number");
-            fflush(stdin);
-            flag = scanf("%lf", &userMatrix[i][j]);
-        }
-    }
-}
-//print full matrix
-printf("----------\n");
-for(i = 0; i < 2; i++) {
-    for(j = 0; j < 2; j++) {
-        printf("[%lf]\t", userMatrix[i][j]);
-    }
-    printf("\n");
-}
-printf("----------\n");
-
-//find determinant
-det = userMatrix[0][0] * userMatrix[1][1] - userMatrix[0][1] * userMatrix[1][0];
-printf("Determinant: %d\n", det);
-
-}
-
-/************
- * FUNCTION
  * NAME: matrix_populate_mxn
- * INPUTS: 
- * OUTPUTS: 
- * DESCRIPTION: 
+ * INPUTS: userMatrix[][], int* m, int* n
+ * OUTPUTS: int* m, int* n
+ * DESCRIPTION: populate the user matrix elemnet at a time, if determinant is possible call the determinant function
 *************/
 void matrix_populate_mxn(double userMatrix[][COLUMNS],int* m, int* n) {
 
@@ -237,9 +150,9 @@ double det = 0;
 /************
  * FUNCTION
  * NAME: matrix_populate_mxn
- * INPUTS: 
- * OUTPUTS: 
- * DESCRIPTION: 
+ * INPUTS: userMatrix, int* m
+ * OUTPUTS: double det (determinant)
+ * DESCRIPTION: finds the determinant of the nxn matrix
 *************/
 double determinant_mxm(double userMatrix[][COLUMNS],int* m) {
 //variables
@@ -259,17 +172,9 @@ for(i = 0; i < *m; i++) {
     //printf("%d\n", ordered_set[i]);
     value++;
 }
-//create an array that is all permutations of the ordered_set
-
+//create an array that is all permutations of the ordered_set (call permute function)
 permute(&perm_index,permutated_array,ordered_set,perm_index,*m - 1);
-/*
-for(i = 0; i < factorial(*m);i++) {
-    for(j = 0; j < *m; j++) {
-        printf("%d", permutated_array[i][j]);
-    }
-    printf("\n");
-}
-*/
+
 
 //supply the permuted sets to the parity function one at a time
 for(i = 0; i < factorial(*m);i++) {
@@ -283,10 +188,10 @@ return det;
 
 /************
  * FUNCTION
- * NAME: matrix_populate_mxn
- * INPUTS: 
- * OUTPUTS: 
- * DESCRIPTION: 
+ * NAME: parity
+ * INPUTS: userMatrix, permutation_set[], int* m, int* n, int* parity_value, double* product
+ * OUTPUTS: int* m, int* n, int* parity_value (unused in its current form outside of this function), double* product
+ * DESCRIPTION: finds parity of each permutated set 1 by 1 and finds the product of given matrix combination. returns determinant to determinant function
 *************/
 void parity(double userMatrix[][COLUMNS],int permutation_set[], int* m, int* n, int* parity_value, double* product) {
 int i = 0; 
@@ -339,11 +244,18 @@ parity_product = parity_product*(*parity_value);
 
 }
 
+/************
+ * FUNCTION
+ * NAME: factorial
+ * INPUTS: int input
+ * OUTPUTS: int output
+ * DESCRIPTION: finds factorial of input value
+*************/
 int factorial(int input) {
 int i = 0;
 int output = input;
 if(input < 0) {
-    printf("ERROR, factorial input must be >= 0\n");
+    printf("ERROR, factorial input must be >= 0, otherwise the answer is undefined\n");
     return -1;
 }
 else if(input == 0) {
@@ -361,13 +273,28 @@ return output;
 
 }
 
-void swap(int* x, int* y) { 
+/************
+ * FUNCTION
+ * NAME: swap
+ * INPUTS: int* input1, int* input2
+ * OUTPUTS: int* input1, int* input2
+ * DESCRIPTION: swaps input1 with input2
+*************/
+void swap(int* input1, int* input2) { 
     int temp; 
-    temp = *x; 
-    *x = *y; 
-    *y = temp; 
+    temp = *input1; 
+    *input1 = *input2; 
+    *input2 = temp; 
 } 
 
+/************
+ * FUNCTION
+ * NAME: permute
+ * INPUTS: int* perm_index, int permutation_array[][COLUMNS], int* term_array, int l, int f
+ * OUTPUTS: int* m, int* n, int* parity_value (unused in its current form outside of this function), double* product
+ * DESCRIPTION: finds all possible permutation of the given "term_array" and returns the permutatoin through the array "permutation_array"
+ * CITATIONS: function is built off of the following article https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+*************/
 void permute(int* perm_index, int permutation_array[][COLUMNS], int* term_array, int l, int f) {
     int i = 0;
     int j = 0;

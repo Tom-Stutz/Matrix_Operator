@@ -1,7 +1,11 @@
-/*************************************
- * Header
- * 
-*************************************/
+/*******************************************************************************************
+AUTHOR   : Tom Stutz
+PROGRAM  : Matrix_Operator
+FILE NAME: matrix.h
+NOTES    : header file associated with matrix.c (contains function prototypes and definitions related to matrix operations
+LAST EDIT: WEDNESDAY MAR 20, 13:26
+VERSION: 1.0.0
+*******************************************************************************************/
 
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
@@ -10,8 +14,8 @@
 
 //definitions
 #define MAXCHAR 10
-#define ROWS 8
-#define COLUMNS 8
+#define ROWS 8  // has a clear effect on segmentation fault
+#define COLUMNS 8 // has a clear effect on segmentation fault
 
 //function prototypes
 void welcome_screen(void);
@@ -19,8 +23,6 @@ void menu_screen(void);
 int wait_for_user(void);
 void enter_matrix(int*,int*);
 void prompt_for_size(int*, int*);
-void matrix_populate_3x3(double userMatrix[][COLUMNS]);
-void matrix_populate_2x2(double userMatrix[][COLUMNS]);
 void matrix_populate_mxn(double userMatrix[][COLUMNS], int*, int*);
 double determinant_mxm(double userMatrix[][COLUMNS],int*);
 void parity(double userMatrix[][COLUMNS],int permutation_set[], int*, int*, int*, double*);
