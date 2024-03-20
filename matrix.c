@@ -293,7 +293,7 @@ for(i = 0; i < *m - 1; i++) {
 
     for(j = i + 1; j < *m; j++) {
         if((permutation_set[j] < permutation_set[i])) {
-            printf("%d is < %d\n", permutation_set[j],permutation_set[i]);
+            
             *parity_value = *parity_value + 1;
         }
     }
@@ -306,14 +306,13 @@ if(*parity_value == 0) {
     *parity_value = 1;
 }
 else if((*parity_value % 2) == 0) {
-    printf("%d mod 2 == 0\n", *parity_value);
+   
     *parity_value = 1;
 }
 else {
     *parity_value = -1;
 }
-printf("set: %d%d%d\n", permutation_set[0],permutation_set[1],permutation_set[2]);
-printf("parity: %d\n", *parity_value);
+
 
 /*loop structure
 a1_a2_a3_...am_
@@ -326,9 +325,7 @@ for(i = 0; i < *m; i++) {
 }
 parity_product = parity_product*(*parity_value);
 *product = *product + parity_product;
-printf("prod: %g\n",*product);
-printf("parity prod: %g\n", parity_product);
-printf("\n");
+
 }
 
 int factorial(int input) {
