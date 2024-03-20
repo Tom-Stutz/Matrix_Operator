@@ -238,29 +238,34 @@ double det = 0; //determinant (will sum together)
 int ordered_set[*m];
 int permutation_set[*m];
 int value = 0;
-int parity_sign = 1;
-double product = 1;     //very important to initialize to 1
+int parity_sign = 0;
+double product = 0;    
 int perm_index = 0;
 int permutated_array[factorial(*m)][COLUMNS];
 //create a set that is {1,2,3,...m}
 for(i = 0; i < *m; i++) {
     ordered_set[i] = value;
-    printf("%d\n", ordered_set[i]);
+    //printf("%d\n", ordered_set[i]);
     value++;
 }
 //create an array that is all permutations of the ordered_set
 
 permute(&perm_index,permutated_array,ordered_set,perm_index,*m - 1);
+/*
 for(i = 0; i < factorial(*m);i++) {
     for(j = 0; j < *m; j++) {
         printf("%d", permutated_array[i][j]);
     }
     printf("\n");
 }
+*/
 
-//loop through all permutatoins of: a(0)_ a(1)_ a(2)...a(m)_  finding the sum of products using parity
-//a(1,{1,2,...m}) all permutations of the set {1,2,...m}
-
+//supply the permuted sets to the parity function one at a time
+for(i = 0; i < factorial(*m);i++) {
+    parity(userMatrix,permutated_array[i],m,m,&parity_sign,&product);
+    parity_sign = 0;
+}
+det = product;
 return det;
 
 }
@@ -284,39 +289,46 @@ check if j < i, if so parity + 1
 {1,i,j,4...m}
 */
 //Find parity of permutation set
-for(i = 0; i < *m; i++) {
+for(i = 0; i < *m - 1; i++) {
 
     for(j = i + 1; j < *m; j++) {
-        if(permutation_set[j] < permutation_set[i]) {
-            
+        if((permutation_set[j] < permutation_set[i])) {
+            printf("%d is < %d\n", permutation_set[j],permutation_set[i]);
             *parity_value = *parity_value + 1;
         }
     }
 
 }
 
+
+
 if(*parity_value == 0) {
     *parity_value = 1;
 }
-else if((*parity_value % 2 == 0)) {
+else if((*parity_value % 2) == 0) {
+    printf("%d mod 2 == 0\n", *parity_value);
     *parity_value = 1;
 }
 else {
     *parity_value = -1;
 }
+printf("set: %d%d%d\n", permutation_set[0],permutation_set[1],permutation_set[2]);
+printf("parity: %d\n", *parity_value);
 
 /*loop structure
 a1_a2_a3_...am_
 ai(permutation_set[i])*a(i+1)(permutation_set[i+1])
-
 */
+double parity_product = 1;
 for(i = 0; i < *m; i++) {
-    *product = (*product)*userMatrix[i][permutation_set[i]];
+    parity_product = (parity_product)*userMatrix[i][permutation_set[i]];
     
 }
-*product = *product*(*parity_value);
+parity_product = parity_product*(*parity_value);
+*product = *product + parity_product;
+printf("prod: %g\n",*product);
+printf("parity prod: %g\n", parity_product);
 printf("\n");
-
 }
 
 int factorial(int input) {
