@@ -237,29 +237,29 @@ int j = 0; //j operates as looping through all permutations of the set {1,2,3...
 double det = 0; //determinant (will sum together)
 int ordered_set[*m];
 int permutation_set[*m];
-int value = 1;
+int value = 0;
 int parity_sign = 1;
 double product = 1;     //very important to initialize to 1
+int perm_index = 0;
+int permutated_array[factorial(*m)][COLUMNS];
 //create a set that is {1,2,3,...m}
 for(i = 0; i < *m; i++) {
     ordered_set[i] = value;
     printf("%d\n", ordered_set[i]);
     value++;
 }
+//create an array that is all permutations of the ordered_set
+
+permute(&perm_index,permutated_array,ordered_set,perm_index,*m - 1);
+for(i = 0; i < factorial(*m);i++) {
+    for(j = 0; j < *m; j++) {
+        printf("%d", permutated_array[i][j]);
+    }
+    printf("\n");
+}
 
 //loop through all permutatoins of: a(0)_ a(1)_ a(2)...a(m)_  finding the sum of products using parity
 //a(1,{1,2,...m}) all permutations of the set {1,2,...m}
-for(i = 0; i < *m; i++) {
-
-    for(j = 0; j<factorial(*m);j++) {
-        
-        //use current permutation and find the parity, +/- to determinant
-        parity(userMatrix,permutation_set,m,m,&parity_sign,&product);
-
-        //reorder permutation set
-    }
-
-}
 
 return det;
 
@@ -312,10 +312,9 @@ ai(permutation_set[i])*a(i+1)(permutation_set[i+1])
 */
 for(i = 0; i < *m; i++) {
     *product = (*product)*userMatrix[i][permutation_set[i]];
-    printf("a%d%d * ", i,permutation_set[i]);
-    printf("%g", *product);
-
+    
 }
+*product = *product*(*parity_value);
 printf("\n");
 
 }
@@ -340,4 +339,32 @@ else {
 
 return output;
 
+}
+
+void swap(int* x, int* y) { 
+    int temp; 
+    temp = *x; 
+    *x = *y; 
+    *y = temp; 
+} 
+
+void permute(int* perm_index, int permutation_array[][COLUMNS], int* term_array, int l, int f) {
+    int i = 0;
+    int j = 0;
+
+    if(l == f) {
+        for(j = 0;j <= f; j++) {
+            permutation_array[*perm_index][j] = term_array[j];
+        }
+        *perm_index = *perm_index + 1;
+    }
+    else {
+        for(i = l;i <= f; i++) {
+            swap(&term_array[l],&term_array[i]);
+            permute(perm_index, permutation_array, term_array,l+1,f);
+            swap(&term_array[l],&term_array[i]);
+        }
+
+
+    }
 }

@@ -25,6 +25,9 @@ void matrix_populate_mxn(double userMatrix[][COLUMNS], int*, int*);
 double determinant_mxm(double userMatrix[][COLUMNS],int*);
 void parity(double userMatrix[][COLUMNS],int permutation_set[], int*, int*, int*, double*);
 int factorial(int);
+void swap(int* , int* );
+void permute(int* perm_index, int permutation_array[][COLUMNS], int* term_array, int l, int f);
+
 
 
 #endif
