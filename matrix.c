@@ -82,9 +82,20 @@ void enter_matrix(int* rows, int* columns) {
 *************/
 void prompt_for_size(int* rows, int* columns) {
 
-    printf("Enter a matrix size in the following format: _x_ (e.g. 2x2 up to 100x100)\n");
+    //variables
+    int flag = 0;
+
+    //error check
+    printf("Enter a matrix size in the following format: _x_ (e.g. 2x2 up to %dx%d)\n",ROWS,COLUMNS);
+    
     fflush(stdin);
-    fscanf(stdin, "%dx%d", rows, columns);
+    flag = fscanf(stdin, "%dx%d", rows, columns);
+    while(flag == 0 || (*rows > ROWS) || (*columns > COLUMNS)) {
+        printf("ERROR. Input a valid dimension");
+        fflush(stdin);
+        flag = 0;
+        flag = fscanf(stdin, "%dx%d", rows, columns);
+    }
     
 
 }

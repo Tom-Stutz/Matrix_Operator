@@ -10,8 +10,8 @@
 
 //definitions
 #define MAXCHAR 10
-#define ROWS 100
-#define COLUMNS 100
+#define ROWS 8
+#define COLUMNS 8
 
 //function prototypes
 void welcome_screen(void);
