@@ -160,12 +160,10 @@ int i = 0; //i operates as looping through the first value in the permutation
 int j = 0; //j operates as looping through all permutations of the set {1,2,3...m}
 double det = 0; //determinant (will sum together)
 int ordered_set[*m];
-int permutation_set[*m];
 int value = 0;
 int parity_sign = 0;
 double product = 0;    
 int perm_index = 0;
-int permutated_array[factorial(*m)][COLUMNS];
 //create a set that is {1,2,3,...m}
 for(i = 0; i < *m; i++) {
     ordered_set[i] = value;
@@ -173,14 +171,10 @@ for(i = 0; i < *m; i++) {
     value++;
 }
 //create an array that is all permutations of the ordered_set (call permute function)
-permute(&perm_index,permutated_array,ordered_set,perm_index,*m - 1);
+permute(userMatrix,&det,ordered_set,0,*m-1);
 
 
 //supply the permuted sets to the parity function one at a time
-for(i = 0; i < factorial(*m);i++) {
-    parity(userMatrix,permutated_array[i],m,m,&parity_sign,&product);
-    parity_sign = 0;
-}
 det = product;
 return det;
 
@@ -193,9 +187,10 @@ return det;
  * OUTPUTS: int* m, int* n, int* parity_value (unused in its current form outside of this function), double* product
  * DESCRIPTION: finds parity of each permutated set 1 by 1 and finds the product of given matrix combination. returns determinant to determinant function
 *************/
-void parity(double userMatrix[][COLUMNS],int permutation_set[], int* m, int* n, int* parity_value, double* product) {
+void parity(double userMatrix[][COLUMNS],int permutation_set[], int* m, int* n, double* product) {
 int i = 0; 
 int j = 0; 
+int parity_value = 0;
 /*loop structure
 check if j < i, if so parity + 1
 {i,j,3,4,...m}
@@ -210,7 +205,7 @@ for(i = 0; i < *m - 1; i++) {
     for(j = i + 1; j < *m; j++) {
         if((permutation_set[j] < permutation_set[i])) {
             
-            *parity_value = *parity_value + 1;
+            parity_value = parity_value + 1;
         }
     }
 
@@ -218,15 +213,15 @@ for(i = 0; i < *m - 1; i++) {
 
 
 
-if(*parity_value == 0) {
-    *parity_value = 1;
+if(parity_value == 0) {
+    parity_value = 1;
 }
-else if((*parity_value % 2) == 0) {
+else if((parity_value % 2) == 0) {
    
-    *parity_value = 1;
+    parity_value = 1;
 }
 else {
-    *parity_value = -1;
+    parity_value = -1;
 }
 
 
@@ -239,7 +234,7 @@ for(i = 0; i < *m; i++) {
     parity_product = (parity_product)*userMatrix[i][permutation_set[i]];
     
 }
-parity_product = parity_product*(*parity_value);
+parity_product = parity_product*(parity_value);
 *product = *product + parity_product;
 
 }
@@ -295,20 +290,18 @@ void swap(int* input1, int* input2) {
  * DESCRIPTION: finds all possible permutation of the given "term_array" and returns the permutatoin through the array "permutation_array"
  * CITATIONS: function is built off of the following article https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
 *************/
-void permute(int* perm_index, int permutation_array[][COLUMNS], int* term_array, int l, int f) {
+void permute(double userMatrix[][COLUMNS], double* det, int* term_array, int l, int f) {
     int i = 0;
     int j = 0;
+    int m = f + 1;
 
     if(l == f) {
-        for(j = 0;j <= f; j++) {
-            permutation_array[*perm_index][j] = term_array[j];
-        }
-        *perm_index = *perm_index + 1;
+        parity(userMatrix,term_array,&m,&m,det);
     }
     else {
         for(i = l;i <= f; i++) {
             swap(&term_array[l],&term_array[i]);
-            permute(perm_index, permutation_array, term_array,l+1,f);
+            permute(userMatrix,det,term_array,l+1,f);
             swap(&term_array[l],&term_array[i]);
         }
 

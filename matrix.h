@@ -25,10 +25,10 @@ void enter_matrix(int*,int*);
 void prompt_for_size(int*, int*);
 void matrix_populate_mxn(double userMatrix[][COLUMNS], int*, int*);
 double determinant_mxm(double userMatrix[][COLUMNS],int*);
-void parity(double userMatrix[][COLUMNS],int permutation_set[], int*, int*, int*, double*);
+void parity(double userMatrix[][COLUMNS],int permutation_set[], int*, int*, double*);
 int factorial(int);
 void swap(int* , int* );
-void permute(int* perm_index, int permutation_array[][COLUMNS], int* term_array, int l, int f);
+void permute(double userMatrix[][COLUMNS], double* det, int* term_array, int l, int f);
 
 
 
