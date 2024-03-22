@@ -161,9 +161,6 @@ int j = 0; //j operates as looping through all permutations of the set {1,2,3...
 double det = 0; //determinant (will sum together)
 int ordered_set[*m];
 int value = 0;
-int parity_sign = 0;
-double product = 0;    
-int perm_index = 0;
 //create a set that is {1,2,3,...m}
 for(i = 0; i < *m; i++) {
     ordered_set[i] = value;
@@ -175,7 +172,6 @@ permute(userMatrix,&det,ordered_set,0,*m-1);
 
 
 //supply the permuted sets to the parity function one at a time
-det = product;
 return det;
 
 }

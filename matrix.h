@@ -14,8 +14,8 @@ VERSION: 1.0.0
 
 //definitions
 #define MAXCHAR 10
-#define ROWS 8  // has a clear effect on segmentation fault
-#define COLUMNS 8 // has a clear effect on segmentation fault
+#define ROWS 15  // has a clear effect on segmentation fault
+#define COLUMNS 15 // has a clear effect on segmentation fault
 
 //function prototypes
 void welcome_screen(void);
