@@ -6,7 +6,6 @@ main: main.o matrix.o
 	@echo "Linking the object files for main"
 	gcc $(CFLAGS) main.o matrix.o -o main
 
-
 main.o: main.c
 	@echo "Compiling main.c"
 	gcc $(CFLAGS) -c main.c 
