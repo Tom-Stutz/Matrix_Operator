@@ -2,6 +2,9 @@ CFLAGS = -I /
 
 all: main
 
+test: all
+	./main < test.txt
+
 main: main.o matrix.o
 	@echo "Linking the object files for main"
 	gcc $(CFLAGS) main.o matrix.o -o main
