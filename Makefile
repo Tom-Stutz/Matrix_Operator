@@ -10,8 +10,8 @@ main: main.o matrix.o
 	gcc main.o matrix.o -o main
 
 %.o: %.c
-	@echo "Compiling $^ for $@"
-	gcc $(CFLAGS) -c $^ 
+	@echo "Compiling $< for $@"
+	gcc $(CFLAGS) -c $< 
 
 clean:
 	rm main.o matrix.o main *.d
